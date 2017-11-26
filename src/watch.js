@@ -1,17 +1,18 @@
 "use strict";
 
 let videos = undefined;
+let playing = undefined;
 
 class Player {
 
     constructor(video, audio) {
         this._video = video;
         this._audio = audio;
-        // this._video.addEventListener('ended', () => {
-        //     if(!this._audio.ended) {
-        //         this._video.play();
-        //     }
-        // }, false);
+        this._video.addEventListener('ended', () => {
+            if(!this._audio.ended) {
+                this._video.play();
+            }
+        }, false);
     }
 
     start() {
@@ -23,19 +24,11 @@ class Player {
 
 var videoPlayer = function(id, src) {
 
-    return `<video id="video_${id}" controls>
+    return `<video id="video_${id}" width="800" height="600">
                 <source src="${src}" type="video/mp4">
             </video>
             `; 
 };
-
-var audioPlayer = function(id, src) {
-
-    return `<audio id="audio_${id}" controls>
-                <source src="${src}" type="video/mp4">
-            </audio>
-            `;
-}
 
 var init = function(queryString) {
 
@@ -59,6 +52,7 @@ var init = function(queryString) {
 var start = function(index) {
 
     let assetsLocation = videos.assetsLocation;
+    playing = index;
     let container = document.getElementById("player");
     try {
         let video_object = videos.objects[index];
@@ -83,6 +77,27 @@ document.onreadystatechange = () => {
         videos = JSON.parse(sessionStorage.getItem('videos'));
         init(queryString);
     };
+}
+
+var goTo = function(index) {
+    window.location.href = `watch.html?video=${index}`;
+}
+
+var proximo = function() {
+    
+    let next = (playing + 1)
+    if(next + 1 > videos.objects.length) {
+        goTo(0);
+    } else {
+        goTo(next);
+    }
+}
+
+var anterior = function() {
+    let previous = (playing - 1)
+    if(previous >= 0) {
+        goTo(previous);
+    }    
 }
 
 

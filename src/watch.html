@@ -7,20 +7,26 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="application-name" content="Conform">
-    <title>Challenge Photozig</title>
+    <title>Watching</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-
   </head>
 
   <body>
 
     <header>
       <h1>
-          Você está assistindo o vídeo: <span id="video_name"></span>
+          Você está assistindo: <span id="video_name"></span>
+      </h1>
     </header>
 
-    <section id="player">
-    </section>
+    <div class="container">
+        <section id="player">
+        </section>
+        <div>
+            <button class="button button-photozig" onclick="anterior()">Anterior</button>
+            <button class="button button-photozig" onclick="proximo()">Próximo</button>
+        </div>
+    </div>
 
     <script type="text/javascript" src="watch.js"></script>
 
