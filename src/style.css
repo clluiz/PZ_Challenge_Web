@@ -1,3 +1,8 @@
 ul {
     list-style-type: none;
 }
+
+.library__video a {
+
+    cursor: pointer;
+}
