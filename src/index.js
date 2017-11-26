@@ -24,6 +24,7 @@ document.onreadystatechange = () => {
                 let assetsLocation = data.assetsLocation;
                 videos.forEach((video,index) => {
                     let li = document.createElement('li');
+                    li.className = "library__video";
                     li.innerHTML = videoComponent(assetsLocation + '/' + video.im, video.name, index); 
                     videosContainer.appendChild(li);
                 });
