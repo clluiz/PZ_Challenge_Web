@@ -5,7 +5,7 @@ let playing = undefined;
 
 class Player {
 
-    constructor(video, audio) {
+    constructor(video, audio, subtitles) {
         this._video = video;
         this._audio = audio;
         this._video.addEventListener('ended', () => {
@@ -13,10 +13,17 @@ class Player {
                 this._video.play();
             }
         }, false);
+        this._subtitles = subtitles;
     }
 
     start() {
-
+        if(this._subtitles) {
+            let subtitles = this._video.addTextTrack('subtitles','subtitles','en-US');
+            subtitles.mode = 'showing';
+            this._subtitles.forEach((subtile) => {
+                subtitles.addCue(new VTTCue(subtile.time,subtile.time + 1.5,subtile.txt));
+            });
+        }
         this._video.play();
         this._audio.play();
     }
@@ -24,7 +31,7 @@ class Player {
 
 var videoPlayer = function(id, src) {
 
-    return `<video id="video_${id}" width="800" height="600">
+    return `<video class="video" id="video_${id}">
                 <source src="${src}" type="video/mp4">
             </video>
             `; 
@@ -63,20 +70,12 @@ var start = function(index) {
         container.appendChild(divVideo);
         let video = document.getElementById(`video_${index}`);
 
-        let player = new Player(video, new Audio(assetsLocation + '/' + video_object.sg));
+        let player = new Player(video, new Audio(assetsLocation + '/' + video_object.sg), video_object.txts);
         player.start();
 
     } catch (e) {
         alert('Este vídeo não se encontra disponível.');
     }
-}
-
-document.onreadystatechange = () => {
-    if (document.readyState === 'complete') {
-        let queryString = window.location.href.split('?')[1];
-        videos = JSON.parse(sessionStorage.getItem('videos'));
-        init(queryString);
-    };
 }
 
 var goTo = function(index) {
@@ -98,6 +97,14 @@ var anterior = function() {
     if(previous >= 0) {
         goTo(previous);
     }    
+}
+
+document.onreadystatechange = () => {
+    if (document.readyState === 'complete') {
+        let queryString = window.location.href.split('?')[1];
+        videos = JSON.parse(sessionStorage.getItem('videos'));
+        init(queryString);
+    };
 }
 
 
