@@ -75,6 +75,7 @@ var start = function(index) {
 
     } catch (e) {
         alert('Este vídeo não se encontra disponível.');
+        window.location.href = "index.html";
     }
 }
 

@@ -34,3 +34,10 @@ Seu projeto será avaliado conforme os critérios:
 4. Boas práticas de programação;
 5. Código bem escrito, fácil de entender e manter;
 6. Interface e uso da aplicação pelo Usuário;
+
+INSTRUÇÕES PARA EXECUTAR O PROJETO:
+
+1) Faça o checkout do projeto;
+2) Entre na pasta e digite npm install;
+3) Ao fim do comando npm executar: npm start
+4) Abrir o navegador e entrar na seguinte url: http://localhost:3000/index.html

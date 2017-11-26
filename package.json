@@ -1,7 +1,7 @@
 {
   "name": "pz_challenge_web",
   "version": "1.0.0",
-  "description": "Projeto para sele��o na Photozig",
+  "description": "Projeto para seleção na Photozig",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
